@@ -1,12 +1,16 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
-import actions from 'redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import shortid from 'shortid';
+import * as contactsOperations from '../../redux/operations';
+import * as contactsSelectors from '../../redux/selectors';
 import s from './ContactForm.module.css';
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = () => {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
+
+    const contacts = useSelector(contactsSelectors.getContacts);
+    const dispatch = useDispatch();
 
     const nameInputId = shortid.generate();
     const numberInputId = shortid.generate();
@@ -23,8 +27,13 @@ const ContactForm = ({ onSubmit }) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        onSubmit( name, number );
-        reset();
+        const foundNames = contacts.map(({ name }) => name.toLocaleLowerCase());
+        if (foundNames.includes(name.toLocaleLowerCase())) {
+            alert(`${name} is already in contacts`);
+        } else {
+            dispatch(contactsOperations.addContact(name, number));
+            reset();
+        }
     };
 
     const reset = () => {
@@ -70,8 +79,4 @@ const ContactForm = ({ onSubmit }) => {
     );
 };
 
-const mapDispatchToProps = dispatch => ({
-    onSubmit: (name, number) => dispatch(actions.addContact(name,number)),
-})
-
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default ContactForm;

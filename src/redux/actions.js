@@ -1,17 +1,32 @@
 import { createAction } from '@reduxjs/toolkit';
-import shortid from 'shortid';
 
-const addContact = createAction('phoneBook/add', (name, number) => ({
-    payload: {
-        id: shortid.generate(),
-        name,
-        number,
-    }
-}));
+////////////////////////     FETCH CONTACTS     //////////////////////////////////////
 
-const deleteContact = createAction('phoneBook/delete');
-const changeFilter = createAction('phoneBook/changeFilter');
+// pending
+export const fetchContactsRequest = createAction('contacts/fetchContactsRequest');
+// fulfilled
+export const fetchContactsSuccess = createAction('contacts/fetchContactsSuccess');
+// rejected
+export const fetchContactsError = createAction('contacts/fetchContactsError');
 
-const actions = { addContact, deleteContact, changeFilter };
+////////////////////////     DELETE CONTACT    //////////////////////////////////////
 
-export default actions;
+// pending
+export const deleteContactRequest = createAction('phoneBook/deleteContactRequest');
+// fulfilled
+export const deleteContactSuccess = createAction('phoneBook/deleteContactSuccess');
+// rejected
+export const deleteContactError = createAction('phoneBook/deleteContactError');
+
+////////////////////////     ADD CONTACT //////////////////////////////////////
+
+// pending
+export const addContactRequest = createAction('phoneBook/addContactRequest');
+// fulfilled
+export const addContactSuccess = createAction('phoneBook/addContactSuccess');
+// rejected
+export const addContactError = createAction('phoneBook/addContactError');
+
+////////////////////////     CHANGE FILTER    //////////////////////////////////////
+
+export const changeFilter = createAction('phoneBook/changeFilter');
