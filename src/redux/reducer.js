@@ -15,7 +15,11 @@ const isLoading = createReducer(false, {
 
     [contactsActions.deleteContactRequest]: () => true,
     [contactsActions.deleteContactSuccess]: () => false,
-    [contactsActions.deleteContactError]: () => false
+    [contactsActions.deleteContactError]: () => false,
+
+    [contactsActions.addContactRequest]: () => true,
+    [contactsActions.addContactSuccess]: () => false,
+    [contactsActions.addContactError]: () => false,
 })
 
 const error = createReducer(null, {
@@ -24,6 +28,9 @@ const error = createReducer(null, {
 
     [contactsActions.deleteContactError]: (_, { payload }) => payload,
     [contactsActions.deleteContactRequest]: () => null,
+
+    [contactsActions.addContactError]: (_, { payload }) => payload,
+    [contactsActions.addContactRequest]: () => null,
 })
 
 const filter = createReducer('', {
