@@ -6,22 +6,11 @@ import s from './ContactList.module.css';
 
 const ContactList = () => {
     const dispatch = useDispatch();
-    const contacts = useSelector(contactsSelectors.getContacts);
-    const filter = useSelector(contactsSelectors.getFilter);
-
+    const filteredContacts = useSelector(contactsSelectors.getVisibleContacts);
     
     useEffect(() => {
         dispatch(contactsOperations.fetchContacts())
     }, [dispatch]);
-    
-    
-    const getVisibleContacts = (allContacts, filter) => {
-        const normalizedFilter = filter.toLocaleLowerCase();
-        return allContacts.filter(({ name }) =>
-        name.toLocaleLowerCase().includes(normalizedFilter));
-    };
-    
-    const filteredContacts = getVisibleContacts(contacts, filter);
 
     const onDeleteContact = (id) => {
         dispatch(contactsOperations.deleteContact(id));
@@ -37,7 +26,6 @@ const ContactList = () => {
                     onDelete={() => onDeleteContact(id)}
                 />
             ))}
-        
         </ul>)
     );
 }
