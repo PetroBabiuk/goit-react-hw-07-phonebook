@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import shortid from 'shortid';
-import * as contactsOperations from '../../redux/operations';
-import * as contactsSelectors from '../../redux/selectors';
+import { contactsOperations, contactsSelectors} from '../../redux';
 import s from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -31,7 +30,7 @@ const ContactForm = () => {
         if (foundNames.includes(name.toLocaleLowerCase())) {
             alert(`${name} is already in contacts`);
         } else {
-            dispatch(contactsOperations.addContact(name, number));
+            dispatch(contactsOperations.addContact({name, number}));
             reset();
         }
     };

@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import shortid from 'shortid';
-import * as contactsOperations from '../../redux/operations';
-import * as contactsSelectors from '../../redux/selectors';
+import { contactsOperations, contactsSelectors} from '../../redux';
 import s from './Filter.module.css';
 
 const Filter = () => {

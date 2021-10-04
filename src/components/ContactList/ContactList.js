@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as contactsOperations from '../../redux/operations';
-import * as contactsSelectors from '../../redux/selectors';
+import { contactsOperations, contactsSelectors} from '../../redux';
 import ContactListItem from './ContactListItem';
 import s from './ContactList.module.css';
 
