@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import shortid from 'shortid';
 import { contactsOperations, contactsSelectors} from '../../redux';
 import s from './ContactForm.module.css';
 
@@ -10,9 +9,6 @@ const ContactForm = () => {
 
     const contacts = useSelector(contactsSelectors.getContacts);
     const dispatch = useDispatch();
-
-    const nameInputId = shortid.generate();
-    const numberInputId = shortid.generate();
 
     const handleChange = (evt) => {
         const { name, value } = evt.currentTarget;
@@ -42,26 +38,24 @@ const ContactForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className={s.form}>
-            <label className={s.label} htmlFor={nameInputId}>Name</label>
+            <label className={s.label}>Name</label>
             <input
                 className={s.input}
                 value={name}
                 type="text"
                 name="name"
-                id={nameInputId}
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
                 required
                 onChange={handleChange}
             />
 
-            <label className={s.label} htmlFor={numberInputId}>Number</label>
+            <label className={s.label}>Number</label>
             <input
                 className={s.input}
                 value={number}
                 type="tel"
                 name="number"
-                id={numberInputId}
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
                 required
